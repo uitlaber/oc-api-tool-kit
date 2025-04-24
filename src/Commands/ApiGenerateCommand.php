@@ -107,17 +107,28 @@ class ApiGenerateCommand extends Command
             return self::FAILURE;
         }
 
-        if ( ! PathConfigHandler::isValidPathGroup($this->option('group'))) {
+        if (! PathConfigHandler::isValidPathGroup($this->option('group'))) {
             $this->error('The path group you entered is not valid');
 
             return self::FAILURE;
         }
 
+        $pluginPath = $this->option('plugin')
+            ?? PathConfigHandler::getDefaultPluginPath($this->option('group'));
+
+        $baseNamespace = $this->option('namespace')
+            ?? PathConfigHandler::getDefaultNamespace($this->option('group'));
+
+
         $apiGenerationCommandInputs = new ApiGenerationCommandInputs(
-            model: $model,
+            model: ucfirst($this->argument('model')),
             userChoices: $this->getUserChoices(),
             schema: SchemaDefinition::createFromSchemaString($this->argument('schema')),
-            pathGroup: $this->option('group')
+            pathGroup: $this->option('group'),
+
+            // Pass the new options:
+            pluginPath: $pluginPath,
+            baseNamespace: $baseNamespace
         );
 
         $this->executeCommands($apiGenerationCommandInputs);
@@ -156,6 +167,8 @@ class ApiGenerateCommand extends Command
             ['resource', 'r', InputOption::VALUE_NONE, 'Generate a resource controller for the model'],
             ['request', 'R', InputOption::VALUE_NONE, 'Create new form request classes for the model and use them in the resource controller'],
             ['group', 'g', InputOption::VALUE_OPTIONAL, 'Specify the group for the generated files', PathConfigHandler::getDefaultPathGroup()],
+            ['plugin', null, InputOption::VALUE_REQUIRED, 'The full path to your October plugin folder'],
+            ['namespace',  null, InputOption::VALUE_REQUIRED, 'The base namespace for your plugin (e.g. Acme\\Blog)'],
         ];
     }
 

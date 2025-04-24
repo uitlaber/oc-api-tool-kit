@@ -123,6 +123,20 @@ return [
                 'namespace' => null,
             ],
         ],
+
+        'plugin_group' => [
+            GeneratorFilesType::MODEL => [
+                'folder_path' => '{pluginPath}/Models', // Use pluginPath here
+                'file_name' => '{ModelName}.php',
+                'namespace' => '{baseNamespace}\Models', // Use baseNamespace here
+            ],
+            GeneratorFilesType::CONTROLLER => [
+                'folder_path' => '{pluginPath}/Controllers',
+                'file_name' => '{ModelName}Controller.php',
+                'namespace' => '{baseNamespace}\Controllers',
+            ],
+            // Add other file types here as needed
+        ],
     ],
 
     /*

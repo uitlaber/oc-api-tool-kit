@@ -4,9 +4,14 @@ namespace Essa\APIToolKit\Generator;
 
 class ApiGenerationCommandInputs
 {
-    public function __construct(private string $model, private array $userChoices, private SchemaDefinition $schema, private string $pathGroup)
-    {
-    }
+    public function __construct(
+        private string $model, 
+        private array $userChoices, 
+        private SchemaDefinition $schema, 
+        private string $pathGroup,
+        private string $pluginPath, // New property for plugin path
+        private string $baseNamespace // New property for base namespace
+    ) {}
 
     public function getModel(): string
     {
@@ -37,4 +42,16 @@ class ApiGenerationCommandInputs
     {
         $this->pathGroup = $pathGroup;
     }
+
+     // Getter for pluginPath
+     public function getPluginPath(): string
+     {
+         return $this->pluginPath;
+     }
+ 
+     // Getter for baseNamespace
+     public function getBaseNamespace(): string
+     {
+         return $this->baseNamespace;
+     }
 }
