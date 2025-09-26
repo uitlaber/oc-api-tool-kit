@@ -1,4 +1,4 @@
-<h1><center> Laravel API tool kit</center></h1>
+<h1><center> OctoberCMS API tool kit</center></h1>
 
 <p align="center">
     <img src="laravel-api-tool-kit.png" style="width:70%;">
@@ -49,7 +49,7 @@ Car::useFilters()->get();
 
 The API Generator automates file setup, creating key files from migrations to controllers. Use one command to kickstart your API development.
 ```
-php artisan api:generate ModelName --all
+php artisan api:generate ModelName --all 
 ```
 #### Schema Support
 Enhance the API Generator with schema support, allowing you to define your database table structure directly from the command line. Generate factory model migrations, requests, and data based on this schema.
